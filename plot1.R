@@ -9,8 +9,17 @@ SCC <- readRDS("Source_Classification_Code.rds")
 # from all sources for each of the years 1999, 2002, 2005, and 2008.
 
 emissionsByYear <- tapply(NEI$Emissions, NEI$year, sum)
+
+png(file="plot1.png")
+
+scipen <- options()$scipen
+options(scipen=10) # for fixed(not exponential) format in y-ticks
 barplot(names.arg=names(emissionsByYear),
         emissionsByYear,
         xlab="year",
-        ylab="total emissions",
+        ylab="total emissions, tons",
         main="Total emissions from PM2.5 in the United States")
+
+
+dev.off()
+options(scipen=scipen)
